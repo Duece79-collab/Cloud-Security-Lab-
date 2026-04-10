@@ -1,150 +1,40 @@
-# Secure Cloud Web App on AWS
+# Cloud Engineer Lab Repo
 
-A hands-on cloud engineering project built to demonstrate production-style AWS architecture, security controls, infrastructure as code, and CI/CD.
+A GitHub-ready lab repo to help you build a cloud engineer portfolio with interview-ready projects.
 
-## What this project shows
+## Labs
 
-- VPC design with public and private subnets
-- Internet Gateway and NAT Gateway routing
-- Application Load Balancer in public subnets
-- Private EC2 application server
-- Private RDS PostgreSQL database
-- Security groups with least-access network paths
-- IAM role for EC2 with AWS Systems Manager access
-- CloudWatch logs and alarms
-- Terraform for reproducible infrastructure
-- GitHub Actions for deployment workflow
+1. [Secure Cloud Web App](labs/01-secure-cloud-web-app.md)
+2. [Terraform CI/CD Pipeline](labs/02-terraform-cicd-pipeline.md)
+3. [Serverless Image Pipeline](labs/03-serverless-image-pipeline.md)
+4. [ECS Fargate Microservice Platform](labs/04-ecs-fargate-microservice-platform.md)
+5. [Observability and Alerting Stack](labs/05-observability-and-alerting-stack.md)
+6. [AWS Multi-Account Foundation](labs/06-aws-multi-account-foundation.md)
+7. [AWS Cost Optimization Lab](labs/07-aws-cost-optimization-lab.md)
 
-## Architecture
+## How to use this repo
 
-User request flows through an Application Load Balancer in public subnets.  
-Traffic is forwarded to a backend application running on EC2 in private subnets.  
-The application connects to PostgreSQL in private DB subnets.  
-The database is not publicly reachable.
+- Work through the labs in order.
+- Build one lab as a real project repo before moving to the next.
+- Add screenshots, diagrams, and cleanup notes as you go.
+- Use the interview questions at the end of each lab to practice talking through your design.
 
-## Security decisions
+## Suggested build order
 
-- Database placed in private subnets only
-- No direct inbound internet access to app server
-- Security groups restricted by source security group, not broad CIDR where possible
-- IAM role used instead of hardcoded AWS credentials
-- Systems Manager can replace SSH for administrative access
-- Encrypted RDS storage
-- CloudWatch monitoring for visibility
+1. Secure Cloud Web App
+2. Terraform CI/CD Pipeline
+3. ECS Fargate Microservice Platform
+4. Serverless Image Pipeline
+5. Observability and Alerting Stack
+6. AWS Multi-Account Foundation
+7. AWS Cost Optimization Lab
 
-## Folder structure
+## Repo workflow
 
-```text
-cloud-secure-app/
-├── terraform/
-├── app/
-├── frontend/
-├── .github/workflows/
+- Create a separate GitHub repo for each finished lab.
+- Reuse the templates in `templates/`.
+- Track your progress in [docs/progress-tracker.md](docs/progress-tracker.md).
 
+## Interview prep
 
-
-#How to deploy
-cd terraform
-terraform init
-terraform plan
-terraform apply
-
-
-└── README.md
-After apply, Terraform will output the ALB DNS name.
-============================================================
-
-Build plan
-7-day version
-
-Day 1: Repo setup, architecture diagram, Terraform init
-Day 2: VPC, subnets, route tables, IGW, NAT
-Day 3: Security groups, IAM role, EC2 bootstrap
-Day 4: ALB, target group, listener, health check
-Day 5: RDS PostgreSQL, DB subnet group, app connectivity
-Day 6: CloudWatch logs and alarms, GitHub Actions
-Day 7: Polish README, screenshots, resume bullets, LinkedIn post
-
-10-day version
-
-Day 1: Scope, repo, diagram, naming standard
-Day 2: VPC and subnet design
-Day 3: Routing and NAT
-Day 4: Security groups and IAM role
-Day 5: Flask app and Dockerfile
-Day 6: EC2 deployment and app validation
-Day 7: ALB and health checks
-Day 8: RDS and database security
-Day 9: Monitoring, WAF, Secrets Manager planning
-Day 10: CI/CD, screenshots, final documentation, resume updates
-
-Resume-ready value
-
-This project demonstrates cloud networking, compute, storage, monitoring, IAM, and security fundamentals in a single deployable environment.
-
-Next improvements
-Add HTTPS listener with ACM certificate
-Add Route 53 custom domain
-Store DB password in Secrets Manager
-Replace direct EC2 bootstrapping with Launch Template and Auto Scaling Group
-Add AWS WAF to protect the ALB
-Add S3 + CloudFront frontend
-
-============================
-script
-#!/usr/bin/env bash
-set -euo pipefail
-
-PROJECT="cloud-secure-app"
-
-mkdir -p "$PROJECT"/terraform
-mkdir -p "$PROJECT"/app
-mkdir -p "$PROJECT"/frontend
-mkdir -p "$PROJECT"/.github/workflows
-
-cat > "$PROJECT/README.md" <<'EOF'
-# Secure Cloud Web App on AWS
-
-A hands-on cloud engineering project built to demonstrate production-style AWS architecture, security controls, infrastructure as code, and CI/CD.
-
-## What this project shows
-
-- VPC design with public and private subnets
-- Internet Gateway and NAT Gateway routing
-- Application Load Balancer in public subnets
-- Private EC2 application server
-- Private RDS PostgreSQL database
-- Security groups with least-access network paths
-- IAM role for EC2 with AWS Systems Manager access
-- CloudWatch logs and alarms
-- Terraform for reproducible infrastructure
-- GitHub Actions for deployment workflow
-
-## Architecture
-
-User request flows through an Application Load Balancer in public subnets.  
-Traffic is forwarded to a backend application running on EC2 in private subnets.  
-The application connects to PostgreSQL in private DB subnets.  
-The database is not publicly reachable.
-
-## Security decisions
-
-- Database placed in private subnets only
-- No direct inbound internet access to app server
-- Security groups restricted by source security group, not broad CIDR where possible
-- IAM role used instead of hardcoded AWS credentials
-- Systems Manager can replace SSH for administrative access
-- Encrypted RDS storage
-- CloudWatch monitoring for visibility
-
-## Folder structure
-
-```text
-cloud-secure-app/
-├── terraform/
-├── app/
-├── frontend/
-├── .github/workflows/
-└── README.md
-
-Add ECS Fargate instead of EC2
+Use [docs/interview-cheat-sheet.md](docs/interview-cheat-sheet.md) after each lab.
